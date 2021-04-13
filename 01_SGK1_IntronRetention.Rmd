@@ -1,0 +1,299 @@
+---
+title: "Analysis of Intron Retention in SGK1 in DLBCL"
+author: "Ieuan Walker & Joanna Krupka"
+date: "5 August 2019"
+output:  
+  github_document:
+    html_preview: true
+---
+
+## Objectives
+
+1. Identify DLBCL cases with SGK1 mutations that affect splicing of intron 1,  
+2. Compare the rate of intron retention between wild-type and mutated samples.    
+
+### Materials and Methods   
+
+Single Nucleotide Variants (SNVs) from RNA-Seq samples identified following [GATK Best Practices Workflow](https://gatk.broadinstitute.org/hc/en-us/articles/360035531192-RNAseq-short-variant-discovery-SNPs-Indels-). All scripts used to run this pipeline are available [here](https://github.com/ashakru/lymphDDX3X).   
+
+**Annotations**  
+We used [GENCODE v.28 comprehensive gene annotation set](https://www.gencodegenes.org/human/release_28.html) to build gene models and predict variants consequences.  
+
+**SGK1 reference**  
+To investigate SGK1 variants [ENSG00000118515](https://www.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000118515;r=6:134169246-134318112) (gene ID) and [ENST00000237305](https://www.ensembl.org/Homo_sapiens/Transcript/Summary?db=core;g=ENSG00000118515;r=6:134169246-134318112;t=ENST00000237305) (transcript ID) models were used.  
+
+**Hardware**  
+Linux Workstation with 56 CPU and 126G memory.  
+
+```{r eval = T, echo = T, message = F, warning = F, error = F}
+library(GenomicRanges)
+library(GenomicFeatures)
+library(rtracklayer)
+library(tidyverse)
+library(foreach)
+library(doParallel)
+library(RColorBrewer)
+library(rstatix)
+library(ggpubr)
+library(knitr)
+
+source("utilis.R")
+
+GTF <- "data/gtf/gencode.v28.annotation.gtf"
+txdb <- makeTxDbFromGFF(GTF, "gtf", organism = "Homo sapiens")
+
+colors <- c(brewer.pal(11, "Spectral"), "grey")
+
+# Functions
+## Function to generate range of SGK1 coordinates by region name
+## Coordinates returend in increaseing order  
+getCoord <- function(name, model=sgk1){
+  start(sgk1[name]):end(sgk1[name])
+}
+## Function to extact unique sample names from each category
+selectSamples <- function(category, data=GOYA_SGK1_Variants_bySample){
+  data %>%
+  dplyr::filter(SGK1_status %in% category) %>% 
+  dplyr::select(SAMPLE) %>%
+  distinct() %>%
+  as.matrix() %>%
+  as.character()
+}
+
+# SGK1 regions
+exons <- exonsBy(txdb, by = "tx", use.names=TRUE)
+sgk1_exons <- exons$ENST00000237305.11
+names(sgk1_exons) <- paste0("ex_", sgk1_exons$exon_rank)
+introns <- intronsByTranscript(txdb, use.names=TRUE)
+sgk1_introns <- introns$ENST00000237305.11
+names(sgk1_introns) <- paste0("int_", 11:1)
+sgk1 <- c(sgk1_introns, sgk1_exons) # All combined
+
+# Tabular form
+sgk1_introns_tab <- as.data.frame(sgk1_introns) %>%
+  rownames_to_column("intron")
+sgk1_exon_tab <- as.data.frame(sgk1_exons) %>%
+  rownames_to_column("exon")
+```
+
+#### Read coverage of SGK1  
+
+We use `bamCoverage` function from [Deeptools 2.0] toolkit to compute per base coverage 
+of SGK1 region. Values were CPM normalised to account for the difference in the total number of 
+reads between samples. We use only uniquely mapped reads (STAR mapping quality = `255`)
+
+```{bash eval = F, echo = T, message = F, warning = F, error = F}
+conda activate utilis
+cd data/bam
+ls *.bam | cut -d "." -f 1 | parallel -j 5 'bamCoverage -p 10 -bs 1 --region chr6:134169246-134318112 --normalizeUsing CPM --minMappingQuality 255 --bam {}.bam -o ../../GOYA_BamCoverage/{}_SGK1.bw'
+```
+
+#### Compute mean coverage of SGK1 introns   
+
+Iterate through 553 `BigWig` files. Parallelized with `foreach` and `doParallel`.  
+
+```{r eval = T, echo = T, message = F, warning = F, error = F, fig.height=5, fig.width=7}
+bigwigs <- list.files("GOYA_BamCoverage", "bw$", full.names = T)
+
+cores=detectCores()
+cl <- makeCluster(5) 
+registerDoParallel(cl)
+
+intron_CPM <- foreach(i=1:length(bigwigs), .combine=left_join, 
+                      .packages = c("rtracklayer", "tidyverse", 
+                                    "GenomicAlignments", "magrittr")) %dopar% {
+  bw <- rtracklayer::import(bigwigs[i], "BigWig", as = c("GRanges"))
+  overlaps <- findOverlaps(sgk1_introns, bw, ignore.strand = T) %>% 
+    as.data.frame() %>%
+    mutate(intron = sgk1_introns_tab$intron[queryHits],
+           score = bw$score[subjectHits],
+           region_start = start(bw)[subjectHits],
+           region_end = end(bw)[subjectHits],
+           region_width = region_end-region_start+1,
+           score_corrected = score*region_width) %>%
+    left_join(dplyr::select(sgk1_introns_tab, intron, width)) %>%
+    group_by(intron) %>%
+    summarise(meanCPM = mean(score_corrected)) 
+  colnames(overlaps) <- c("intron", splitvec(splitvec(bigwigs[i], "/", 2), "_", 1))
+  overlaps
+}
+
+sgk1_introns_tab_full <- sgk1_introns_tab %>%
+  left_join(intron_CPM)
+```
+
+#### Classify SGK1 variants    
+
+Classify SGK1 variants into groups based on the confidence of functional relevance in DLBCL.  
+
+*Exon Mutant* = mutation in `chr6:134174586` (exact exon2/intron1 splice site)  
+*Intron Mutant* =  mutation in `chr6:134174587`  (exact exon2/intron1 splice site)  
+*Intron1 Exon2 Variant* = Nonsynonymous variant in intron 1 or exon 2 with allele depth > 50       
+*SGK1 Variant* = Variant with allele depth > 50, not in Intron1 Exon2  
+*Wild Type* = No variants  
+
+GnomAD filtering (to remove most common germline variants)  
+
+```{r eval = T, echo = T, message = F, warning = F, error = F, fig.height=5, fig.width=7}
+SGK1_sgnomad <- read_csv("variants/gnomAD_v3.1.1_(non-cancer)_ENSG00000118515_2021_04_13_11_36_07.csv") %>%
+  mutate(uniqueID = paste(Position, Reference, Alternate, sep = "_"))
+
+GOYA_SGK1_Variants <- read_csv("variants/GOYA_SGK1variants_combined.csv") %>%
+  mutate(uniqueID = paste(start, REF, varAllele, sep = "_"),
+         inGnomAD = uniqueID %in% SGK1_sgnomad$uniqueID) 
+table(GOYA_SGK1_Variants$inGnomAD)
+```
+
+```{r eval = T, echo = T, message = F, warning = F, error = F, fig.height=5, fig.width=7}
+# Add SGK1
+GOYA_SGK1_Variants_filtered <- GOYA_SGK1_Variants %>% 
+  dplyr::filter(FILTER == "PASS" & !inGnomAD) %>%
+  dplyr::select(SAMPLE, start, end, CONSEQUENCE, depthALT, depthREF, REF, varAllele, REFCODON, VARCODON) %>%
+  distinct() %>%
+  mutate(
+    SGK1_status = case_when(
+      start %in% 134174587 & depthALT >= 10 ~ "Intron Mutant",
+      start %in% 134174586 & depthALT >= 10 ~ "Exon Mutant",
+      start %in% c(134174618:134174588, 134174585:134174555, 134174732:134174896) & depthALT > 50 &
+        CONSEQUENCE != "synonymous" ~ "Other Exon1,Exon2,Intron1 Variant",
+      depthALT>50  ~ "Other SGK1 Variant",
+      TRUE ~ "Wild Type")) 
+
+GOYA_SGK1_Variants_bySample <- GOYA_SGK1_Variants_filtered %>%  
+  group_by(SAMPLE) %>%
+  summarise(SGK1_status = unique(SGK1_status)) 
+
+# Define sample groups
+intronMut <-selectSamples("Intron Mutant", GOYA_SGK1_Variants_bySample) 
+exonMut <- selectSamples("Exon Mutant", GOYA_SGK1_Variants_bySample) 
+Ex1int1_mut <- selectSamples("Other Exon1,Exon2,Intron1 Variant", GOYA_SGK1_Variants_bySample) 
+Mut_alt <- selectSamples(c("Other SGK1 Variant"), GOYA_SGK1_Variants_bySample) 
+```
+
+#### Intergate SGK1 mutation status with the rate of intron retention  
+
+```{r eval = T, echo = T, message = F, warning = F, error = F}
+sgk1_introns_annotated <- sgk1_introns_tab_full %>%
+  dplyr::select(intron, starts_with("SRR")) %>%
+  gather(SAMPLE, meanCPM, -intron) %>%
+  mutate(SGK1_status = case_when(SAMPLE %in% intronMut ~ "Intron Mutant",
+                                 SAMPLE %in% exonMut ~ "Exon Mutant",
+                                 SAMPLE %in% Ex1int1_mut ~ "Other Exon1,Exon2,Intron1 Variant",
+                                 SAMPLE %in% Mut_alt ~ "Other SGK1 Variant",
+                                 TRUE ~ "Wild Type")) %>%
+  ungroup() %>%
+  mutate(meanCPM = replace_na(meanCPM, 0)) %>%
+  dplyr::group_by(SAMPLE) %>%
+  mutate(scaledCPM = scale(meanCPM)) %>%
+  dplyr::select(-meanCPM)
+```
+
+First, we will visualize the intron retention rate in all categories.  
+
+```{r eval = T, echo = T, message = F, warning = F, error = F}
+sgk1_introns_annotated_all <- sgk1_introns_annotated %>%
+  dplyr::filter(intron == "int_1") %>%
+  distinct() %>%
+  ungroup() 
+         
+table(sgk1_introns_annotated_all$SGK1_status)
+length(unique(sgk1_introns_annotated_all$SAMPLE))  
+
+sgk1_introns_clear <- sgk1_introns_annotated_all %>%
+  #dplyr::filter(SGK1_status != "Discard") %>%
+  dplyr::mutate(SGK1_status = factor(SGK1_status, levels = c("Exon Mutant",
+                                                             "Intron Mutant", 
+                                                             "Other Exon1,Exon2,Intron1 Variant",
+                                                             "Other SGK1 Variant",
+                                                             "Wild Type")))
+```
+
+**Statistical analysis of intron 1 retention**  
+
+```{r eval = T, echo = T, message = F, warning = F, error = F, fig.height=8, fig.width=7}
+table(sgk1_introns_clear$SGK1_status)
+sgk1_introns_kruskal <- sgk1_introns_clear %>%
+ kruskal_test(scaledCPM ~ SGK1_status)
+kable(sgk1_introns_kruskal)
+
+sgk1_introns_wilcox <- sgk1_introns_clear %>% 
+  wilcox_test(scaledCPM ~ SGK1_status)
+kable(sgk1_introns_wilcox)
+
+ggboxplot(sgk1_introns_clear, x = "SGK1_status", y = "scaledCPM",
+         fill = "SGK1_status",
+         palette = colors[c(1,2,10,11,12)],
+         outlier.size = 0.5) +
+  # Add pairwise comparisons p-value
+  stat_compare_means(comparisons = list(c("Wild Type", "Exon Mutant"),
+                                        c("Wild Type", "Intron Mutant"),
+                                        c("Wild Type", "Other Exon1,Exon2,Intron1 Variant"),
+                                        c("Wild Type", "Other SGK1 Variant")),
+                     label = "p.signif") + 
+  # Add global p-value
+  stat_compare_means(label.y = 5) +
+  theme(legend.position = "right",
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(y = "Ratio of Scaled Intron 1 Coverage", x = "") 
+ggsave("plots/SGK1_allCategories.pdf")
+```
+
+`Intron1 Exon2 Variant` and `SGK1 Variant` are likely to contain large number
+of germline variants (lack of germline control in the dataset). For clarity, we will 
+visualize the intron retention rate with the two groups exluded.  
+
+```{r eval = T, echo = T, message = F, warning = F, error = F}
+# Combine variant
+sgk1_introns_annotated_highconf <- sgk1_introns_annotated  %>%
+  dplyr::filter(intron == "int_1" & !(SGK1_status %in% c("Other Exon1,Exon2,Intron1 Variant", 
+                                                         "Other SGK1 Variant"))) %>%
+  distinct() %>%
+  ungroup() 
+         
+table(sgk1_introns_annotated_highconf$SGK1_status)
+length(unique(sgk1_introns_annotated_highconf$SAMPLE))  
+
+sgk1_introns_clear <- sgk1_introns_annotated_highconf %>%
+  dplyr::mutate(SGK1_status = factor(SGK1_status, levels = c("Exon Mutant",
+                                                             "Intron Mutant",
+                                                             "Wild Type")))
+```
+
+**Statistical analysis of intron 1 retention**  
+
+```{r eval = T, echo = T, message = F, warning = F, error = F, fig.height=6, fig.width=7}
+table(sgk1_introns_clear$SGK1_status)
+sgk1_introns_kruskal <- sgk1_introns_clear %>%
+ kruskal_test(scaledCPM ~ SGK1_status)
+kable(sgk1_introns_kruskal)
+
+sgk1_introns_wilcox <- sgk1_introns_clear %>% 
+  wilcox_test(scaledCPM ~ SGK1_status)
+kable(sgk1_introns_wilcox)
+
+ggboxplot(sgk1_introns_clear, x = "SGK1_status", y = "scaledCPM",
+         fill = "SGK1_status",
+         palette = colors[c(10,2,12)],
+         outlier.size = 0.5) +
+  # Add pairwise comparisons p-value
+  stat_compare_means(comparisons = list(c("Wild Type", "Exon Mutant"),
+                                        c("Wild Type", "Intron Mutant")),
+                     label = "p.signif") + 
+  # Add global p-value
+  stat_compare_means(label.y = 5) +
+  theme(legend.position = "right",
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(y = "Ratio of Scaled Intron Coverage", x = "") 
+ggsave("plots/SGK1_spliceSite.pdf")
+
+# Generate supplementary tables
+write_csv(sgk1_introns_annotated_highconf, "tables/SGK1_intron1_retentionRate_fig1E.csv")
+
+GOYA_SGK1_intron1exon2 <- GOYA_SGK1_Variants_filtered %>% 
+  dplyr::filter(SGK1_status %in% c("Intron Mutant", "Exon Mutant"))
+write_csv(GOYA_SGK1_intron1exon2, "tables/SGK1_GOYAvariants.csv")
+```
+
+```{r eval = T, echo = T, message = F, warning = F, error = F}
+sessionInfo()
+```

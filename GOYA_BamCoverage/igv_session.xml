@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Session genome="hg38" hasGeneTrack="true" hasSequenceTrack="true" locus="chr6:134174414-134174856" nextAutoscaleGroup="6" version="8">
+    <Resources>
+        <Resource path="SRR8513058_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513390_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513537_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513300_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513346_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513365_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513074_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513303_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513416_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513014_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513215_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513080_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513401_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513475_1_trim_SGK1.bw"/>
+        <Resource path="../sahimiPlot/SRR8513522_1_trim_SGK1.bam"/>
+        <Resource path="../sahimiPlot/SRR8513365_1_trim_SGK1.bam"/>
+        <Resource path="SRR8513202_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513335_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513094_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513422_1_trim_SGK1.bw"/>
+        <Resource path="../sahimiPlot/SRR8513014_1_trim_SGK1.bam"/>
+        <Resource path="SRR8513311_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513097_1_trim_SGK1.bw"/>
+        <Resource path="SRR8512996_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513075_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513124_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513403_1_trim_SGK1.bw"/>
+        <Resource path="SRR8513248_1_trim_SGK1.bw"/>
+    </Resources>
+    <Panel height="1000" name="DataPanel" width="1133">
+        <Track attributeKey="SRR8513014_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="255,0,0" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513014_1_trim_SGK1.bw" name="SRR8513014_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="14.3383" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513422_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="255,0,0" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513422_1_trim_SGK1.bw" name="SRR8513422_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="5.03953" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513311_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="255,0,0" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513311_1_trim_SGK1.bw" name="SRR8513311_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="3.19871" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513058_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="255,0,0" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513058_1_trim_SGK1.bw" name="SRR8513058_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="30.0793" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513401_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="255,0,0" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513401_1_trim_SGK1.bw" name="SRR8513401_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="5.95182" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513365_1_trim_SGK1.bam Junctions" clazz="org.broad.igv.sam.SpliceJunctionTrack" fontSize="10" height="60" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/sahimiPlot/SRR8513365_1_trim_SGK1.bam_junctions" name="SRR8513365_1_trim_SGK1.bam Junctions" visible="false"/>
+        <Track attributeKey="SRR8513014_1_trim_SGK1.bam Junctions" clazz="org.broad.igv.sam.SpliceJunctionTrack" fontSize="10" height="60" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/sahimiPlot/SRR8513014_1_trim_SGK1.bam_junctions" name="SRR8513014_1_trim_SGK1.bam Junctions" visible="false"/>
+        <Track attributeKey="SRR8513365_1_trim_SGK1.bam Junctions" clazz="org.broad.igv.sam.SpliceJunctionTrack" fontSize="10" height="60" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/sahimiPlot/SRR8513365_1_trim_SGK1.bam_junctions" name="SRR8513365_1_trim_SGK1.bam Junctions" visible="false"/>
+        <Track attributeKey="SRR8513014_1_trim_SGK1.bam Junctions" clazz="org.broad.igv.sam.SpliceJunctionTrack" fontSize="10" height="60" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/sahimiPlot/SRR8513014_1_trim_SGK1.bam_junctions" name="SRR8513014_1_trim_SGK1.bam Junctions" visible="false"/>
+        <Track attributeKey="SRR8513522_1_trim_SGK1.bam Junctions" clazz="org.broad.igv.sam.SpliceJunctionTrack" fontSize="10" height="60" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/sahimiPlot/SRR8513522_1_trim_SGK1.bam_junctions" name="SRR8513522_1_trim_SGK1.bam Junctions" visible="false"/>
+        <Track attributeKey="SRR8513097_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="255,0,0" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513097_1_trim_SGK1.bw" name="SRR8513097_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="3.81519" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513390_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="255,0,0" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513390_1_trim_SGK1.bw" name="SRR8513390_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="5.29807" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513303_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="255,0,0" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513303_1_trim_SGK1.bw" name="SRR8513303_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="2.27498" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513080_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="255,0,0" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513080_1_trim_SGK1.bw" name="SRR8513080_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="3.63568" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513537_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="255,0,0" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513537_1_trim_SGK1.bw" name="SRR8513537_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="7.81935" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513346_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="0,102,204" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513346_1_trim_SGK1.bw" name="SRR8513346_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="8.59174" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513300_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="0,102,204" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513300_1_trim_SGK1.bw" name="SRR8513300_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="15.3988" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513365_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="0,102,204" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513365_1_trim_SGK1.bw" name="SRR8513365_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="12.1928" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513416_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="0,102,204" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513416_1_trim_SGK1.bw" name="SRR8513416_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="7.85013" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513248_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="0,102,204" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513248_1_trim_SGK1.bw" name="SRR8513248_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="7.06169" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513094_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="0,102,204" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513094_1_trim_SGK1.bw" name="SRR8513094_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="4.91612" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513075_1_trim_SGK1.bw" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="0,102,204" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513075_1_trim_SGK1.bw" name="SRR8513075_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="none">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="7.1931" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="SRR8513475_1_trim_SGK1.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="153,153,153" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513475_1_trim_SGK1.bw" name="SRR8513475_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="12.510045" minimum="0.0" type="LOG"/>
+        </Track>
+        <Track attributeKey="SRR8513202_1_trim_SGK1.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="153,153,153" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513202_1_trim_SGK1.bw" name="SRR8513202_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="8.904739" minimum="0.0" type="LOG"/>
+        </Track>
+        <Track attributeKey="SRR8513403_1_trim_SGK1.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="153,153,153" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513403_1_trim_SGK1.bw" name="SRR8513403_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="6.3994045" minimum="0.0" type="LOG"/>
+        </Track>
+        <Track attributeKey="SRR8513215_1_trim_SGK1.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="153,153,153" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513215_1_trim_SGK1.bw" name="SRR8513215_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="12.70366" minimum="0.0" type="LOG"/>
+        </Track>
+        <Track attributeKey="SRR8513335_1_trim_SGK1.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="153,153,153" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513335_1_trim_SGK1.bw" name="SRR8513335_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="7.86846" minimum="0.0" type="LOG"/>
+        </Track>
+        <Track attributeKey="SRR8513124_1_trim_SGK1.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="153,153,153" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513124_1_trim_SGK1.bw" name="SRR8513124_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="6.2165837" minimum="0.0" type="LOG"/>
+        </Track>
+        <Track attributeKey="SRR8512996_1_trim_SGK1.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="153,153,153" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8512996_1_trim_SGK1.bw" name="SRR8512996_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="3.413207" minimum="0.0" type="LOG"/>
+        </Track>
+        <Track attributeKey="SRR8513074_1_trim_SGK1.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="153,153,153" fontSize="10" id="/Users/joannakrupka/Dropbox (Cambridge University)/phd/ss08/solaris/GOYA_BamCoverage/SRR8513074_1_trim_SGK1.bw" name="SRR8513074_1_trim_SGK1.bw" renderer="BAR_CHART" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="4.9509563" minimum="0.0" type="LOG"/>
+        </Track>
+    </Panel>
+    <Panel height="96" name="FeaturePanel" width="1133">
+        <Track attributeKey="Reference sequence" clazz="org.broad.igv.track.SequenceTrack" fontSize="10" id="Reference sequence" name="Reference sequence" visible="true"/>
+        <Track attributeKey="Gene" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" colorScale="ContinuousColorScale;0.0;845.0;255,255,255;0,0,178" fontSize="10" height="35" id="hg38_genes" name="Gene" visible="true"/>
+    </Panel>
+    <PanelLayout dividerFractions="0.8690476190476191"/>
+    <HiddenAttributes>
+        <Attribute name="DATA FILE"/>
+        <Attribute name="DATA TYPE"/>
+        <Attribute name="NAME"/>
+    </HiddenAttributes>
+</Session>
