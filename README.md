@@ -24,8 +24,3 @@ find cases with SGK1 mutations and investigate the scale of aberrant splicing in
 these samples. Raw `FASTQ` files are avaliable from GEO with accession number 
 [GSE125966](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE125966) 
 (date accessed 28 October 2019).     
-
-### Workflow  
-
-We utilized the open source GOYA DLBCL clinical trial – paired-end RNA-Seq dataset 
-of 553 patient samples, which is publicly available from
