@@ -51,12 +51,14 @@ identified from RNA-Seq data.
 1. Mutation in the first base of exon 2 (chr6:134174586) and the last base of intron 1 (chr6:134174587) were found in 7 and 10 samples, respectively.   
 2. Mutation of the intron 1 acceptor site (3' end of the intron) and the first base of the exon 2 are associated with statistically significant increase in read coverage of intron 1 (aberrant splicing leading to intron retention).   
 
-![](01_SGK1_IntronRetention_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->  
-**Comparison of the intron retention rate between SGK1 mutant and wild-type samples,
-Pairwise comparisons with Wilcoxon rank sum test, adjusted p-values \*\*\* - < 0.001 \*\*\*\* - < 0.0001 **
+**Comparison of the intron retention rate between SGK1 mutant and wild-type samples**
+![](01_SGK1_IntronRetention_files/figure-gfm/unnamed-chunk-10-1.png | width=100 )
 
-![](plots/IGV_intron1_coverage.png)<!-- -->  
-**Red - Intron Mutation, Blue - Exon mutation, Grey - Representative Wild-type samples** 
+Pairwise comparisons with Wilcoxon rank sum test, adjusted p-values \*\*\* - < 0.001 \*\*\*\* - < 0.0001
+
+**Intron 1 / Exon 1-2 coverage in DLBCL samples**  
+![](plots/IGV_intron1_coverage.png | width=500 )
+Red - Intron Mutation, Blue - Exon mutation, Grey - Representative Wild-type samples
 
 
 
