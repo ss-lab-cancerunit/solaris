@@ -3,11 +3,12 @@
 Analysis of RNA-Seq data from the GOYA trial to identify DLBCL splice-mutant cases and 
 look for the presence of aberrantly spliced SGK1 neoisoforms.  
 
-**Publication:**  
-[SGK1 mutations in DLBCL generate hyperstable protein neoisoforms that promote AKT independence]() 
-Jie Gao, Eirini Sidiropoulou, Ieuan Walker, Joanna Krupka, Karol Mizielinski, 
-Shamith Samarajiwa & Daniel J Hodson
- 
+### Manuscript   
+[SGK1 mutations in DLBCL generate hyperstable protein neoisoforms that promote AKT independence](https://doi.org/10.1182/blood.2020010432
+)  
+Jie Gao, Eirini Sidiropoulou, Ieuan Walker, Joanna A Krupka, Karol Mizielinski, 
+Shamith Samarajiwa & Daniel J Hodson  
+*Blood 2021 May 14*
 
 ### Background     
 
@@ -25,6 +26,9 @@ find cases with SGK1 mutations and investigate the scale of aberrant splicing in
 these samples. Raw `FASTQ` files are avaliable from GEO with accession number 
 [GSE125966](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE125966) 
 (date accessed 28 October 2019).     
+
+
+
 
 ---
 
